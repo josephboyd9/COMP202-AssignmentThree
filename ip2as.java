@@ -108,7 +108,7 @@ class prefix
 	}
 
 	////////////////////////////////TROUBLESHOOTING//////////////////////////
-	if(maskF!=
+       
 	//System.out.println("prefix : "+toString());
 	//System.out.println("address input : "+addr);
 	//for(String s:destS)System.out.print(s);
@@ -126,7 +126,10 @@ class prefix
 	     * (i.e. enough to cover this.len) to determine if this
 	     * address is a match or not
 	     */
-	    int num = maskF&(dest[i]<<((4-i)*4));
+	    if(len-(i*4)>8)
+		maskF=mask[7];
+	    else maskF=mask[len-(i*4)];
+	    int num = maskF&dest[i];
 	    if(num!=net[i])
 		return false;
 	}
